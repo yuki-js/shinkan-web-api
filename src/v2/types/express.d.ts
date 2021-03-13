@@ -3,10 +3,11 @@ declare namespace Express {
   interface AuthedUser {
     /** ユーザID */
     uid: string
+    org?: any
   }
 
   export interface Request {
     /** 認証済みのユーザ情報 */
-    auth: AuthedUser | null
+    auth?: AuthedUser
   }
 }

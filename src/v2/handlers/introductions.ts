@@ -2,6 +2,8 @@
  * v2.Introduction
  */
 import express from 'express'
+import { getRepository } from 'typeorm'
+import { Introduction } from '../../database/entity/Introduction'
 
 // Introductionの型定義
 // import { IIntroduction } from '../types'
@@ -14,12 +16,21 @@ const app = express()
 
 // v2.introductions.list
 app.get('/', (_, res) => {
-  res.status(501).json({ message: 'to be implemented' })
+  ;(async () => {
+    const allIntro = await getRepository(Introduction).find()
+    res.send(allIntro)
+  })()
 })
 
 // v2.introductions.get
-app.get('/:id', (_, res) => {
-  res.status(501).json({ message: 'to be implemented' })
+app.get('/:id', (req, res) => {
+  ;(async () => {
+    const id = parseInt(req.params.id, 10)
+    const intro = await getRepository(Introduction).find({
+      id,
+    })
+    res.send(intro)
+  })()
 })
 
 // v2.introductions.create
