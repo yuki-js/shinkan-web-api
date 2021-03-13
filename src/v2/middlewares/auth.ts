@@ -7,9 +7,11 @@ export const authMiddleware: RequestHandler = (req, res, next) => {
       throw new Error()
     }
 
-    await admin.auth().verifyIdToken(token)
+    const decodedToken = await admin.auth().verifyIdToken(token)
+    const uid = decodedToken.uid
+    req.auth = { uid }
   })()
-    .then(next)
+    .then(() => next())
     .catch(e => {
       console.log(e)
 

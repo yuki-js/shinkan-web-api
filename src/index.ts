@@ -3,6 +3,9 @@ dotenv.config() // .envをprocess.envに割当て
 import express from 'express'
 import v2 from './v2'
 import './firebase'
+import { connect } from './database'
+
+connect()
 
 const PORT = +(process.env.PORT || 8080)
 
